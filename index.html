@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>קורס עזר בכימיה כללית ופיזיקלית – רפואה, בר אילן</title>
+<style>
+  :root{
+    --bg:#faf8f5; --card:#ffffff; --ink:#2b2420; --accent:#8a5a3b;
+    --accent-soft:#efe2d6; --line:#e6ddd2;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#1c1815; --card:#262019; --ink:#efe7dc; --accent:#e0a97a;
+      --accent-soft:#3a2f24; --line:#3a322a;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#1c1815; --card:#262019; --ink:#efe7dc; --accent:#e0a97a;
+    --accent-soft:#3a2f24; --line:#3a322a;
+  }
+  *{box-sizing:border-box;}
+  html{ scroll-padding-top: calc(1rem + env(safe-area-inset-top,0px)); }
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Segoe UI","Arial Hebrew","Heebo",Arial,sans-serif;
+    line-height:1.7;
+  }
+  header{ max-width:900px; margin:0 auto; padding:2.2rem 1.2rem 1rem; text-align:center; }
+  header h1{ font-size:1.8rem; margin:0 0 .3rem; color:var(--accent); }
+  main{ max-width:900px; margin:0 auto; padding:0 1.2rem 3rem; }
+
+  nav.toc{
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    padding:1.2rem 1.4rem; margin-bottom:2rem;
+  }
+  nav.toc h2{ margin:0 0 .8rem; font-size:1.1rem; }
+  nav.toc ol{ margin:0; padding-inline-start:1.4rem; }
+  nav.toc li{ margin-bottom:.5rem; }
+  nav.toc a{ color:var(--ink); text-decoration:none; font-weight:600; }
+  nav.toc a:hover{ color:var(--accent); text-decoration:underline; }
+
+  section.block{
+    border-top:2px solid var(--line); padding-top:1.6rem; margin-bottom:2.4rem;
+  }
+  section.block h2{ font-size:1.35rem; color:var(--accent); margin:0 0 1rem; }
+  .copyright-box{
+    background:var(--accent-soft); border:2px solid var(--accent); border-radius:12px;
+    padding:.9rem 1.2rem; margin:0 0 1.5rem; font-size:.97rem; text-align:center;
+  }
+  .intro-box{
+    background:var(--accent-soft); border-radius:12px; padding:1rem 1.2rem;
+    margin-bottom:1.5rem; font-size:.97rem;
+  }
+  .intro-box em{ font-style:normal; font-weight:700; }
+
+  .lesson{
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    padding:1.2rem; margin-bottom:1.4rem;
+  }
+  .lesson h3{
+    margin:0 0 .6rem; font-size:1.1rem; color:var(--accent);
+    display:flex; align-items:center; gap:.5rem;
+  }
+  .num{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:1.8rem; height:1.8rem; border-radius:50%;
+    background:var(--accent-soft); color:var(--accent); font-weight:bold; font-size:.95rem;
+  }
+  /* כל המסגרות (סרטונים ו-PDF) באותו גובה: מראש הדף ועד שורת המייל של המשתמש. לשינוי - עדכני את --frame-h */
+  :root{ --frame-h:560px; }
+  .drive-frame{ width:100%; height:var(--frame-h); margin:.6rem 0 .8rem; border-radius:10px; overflow:hidden; background:#fff; border:1px solid var(--line); }
+  .drive-frame iframe{ display:block; width:100%; height:100%; border:0; }
+  @media (max-width:600px){ :root{ --frame-h:660px; } }
+  .topics{ margin:.4rem 0 .8rem; padding-inline-start:1.3rem; }
+  .topics li{ margin-bottom:.25rem; font-size:.95rem; }
+  .pdf-note{
+    display:flex; align-items:center; gap:.5rem; background:var(--accent-soft);
+    border-radius:10px; padding:.6rem .9rem; font-size:.88rem;
+  }
+  .missing{ font-style:italic; opacity:.7; font-size:.9rem; }
+
+  .recommend p{ margin:0 0 .9rem; font-size:.97rem; }
+  .recommend ol{ padding-inline-start:1.4rem; }
+  .recommend ol li{ margin-bottom:.6rem; font-size:.97rem; }
+
+  .link-card{
+    display:block; background:var(--card); border:1px solid var(--line);
+    border-radius:12px; padding:1rem 1.2rem; margin-bottom:1rem;
+    color:var(--ink); text-decoration:none;
+  }
+  .link-card strong{ color:var(--accent); }
+  .link-card:hover{ border-color:var(--accent); }
+
+  /* ---- נגישות + חזרה למעלה ---- */
+  :root{ --a11y-bottom:72px; --fab-bg:#8a5a3b; --fab-fg:#fff; }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --fab-bg:#e0a97a; --fab-fg:#1c1815; } }
+  html:root.a11y-hc{ --bg:#000; --card:#000; --ink:#fff; --accent:#ffea00; --accent-soft:#1a1a1a; --line:#fff; --fab-bg:#ffea00; --fab-fg:#000; }
+  html.a11y-hl a{ background:#ffea00; color:#000 !important; text-decoration:underline !important; outline:2px solid #000; padding:0 .15em; }
+  html.a11y-hl .link-card strong{ color:#000; }
+
+  .fab{
+    position:fixed; z-index:1000; width:52px; height:52px; border-radius:50%;
+    border:2px solid #fff; background:var(--fab-bg); color:var(--fab-fg);
+    display:flex; align-items:center; justify-content:center; cursor:pointer;
+    box-shadow:0 3px 10px rgba(0,0,0,.35); font-size:1.5rem; padding:0;
+  }
+  .fab:focus-visible, .a11y-panel button:focus-visible, .a11y-link:focus-visible{ outline:3px solid #005fcc; outline-offset:2px; }
+  #a11yBtn{ right:16px; bottom:calc(var(--a11y-bottom) + env(safe-area-inset-bottom,0px)); }
+  #toTop{ left:16px; bottom:calc(var(--a11y-bottom) + env(safe-area-inset-bottom,0px)); }
+  #toTop[hidden]{ display:none; }
+
+  .a11y-panel{
+    position:fixed; z-index:1001; right:16px;
+    bottom:calc(var(--a11y-bottom) + 64px + env(safe-area-inset-bottom,0px));
+    width:min(280px, calc(100vw - 32px)); background:var(--card); color:var(--ink);
+    border:1px solid var(--line); border-radius:16px; padding:1rem;
+    box-shadow:0 8px 28px rgba(0,0,0,.3);
+  }
+  .a11y-panel[hidden]{ display:none; }
+  .a11y-panel h2{ margin:0 0 .7rem; font-size:1rem; }
+  .a11y-panel button.opt{
+    display:block; width:100%; margin-bottom:.5rem; padding:.6rem .8rem; text-align:start;
+    background:var(--accent-soft); color:var(--ink); border:1px solid var(--line);
+    border-radius:10px; font:inherit; font-size:.95rem; cursor:pointer;
+  }
+  .a11y-panel button.opt[aria-pressed="true"]{ border-color:var(--accent); font-weight:700; }
+  .a11y-link{ background:none; border:0; color:var(--accent); text-decoration:underline; font:inherit; font-size:.95rem; cursor:pointer; padding:.3rem; display:block; margin:.4rem auto 0; }
+
+  dialog#a11yStatement{
+    max-width:min(640px, calc(100vw - 2rem)); max-height:85vh; overflow:auto;
+    background:var(--card); color:var(--ink); border:1px solid var(--line);
+    border-radius:16px; padding:1.4rem 1.4rem 1.2rem; line-height:1.8;
+  }
+  dialog#a11yStatement::backdrop{ background:rgba(0,0,0,.55); }
+  dialog#a11yStatement h2{ margin:0 0 .8rem; color:var(--accent); font-size:1.3rem; }
+  dialog#a11yStatement p{ margin:0 0 .8rem; }
+  dialog#a11yStatement a{ color:var(--accent); font-weight:700; }
+  .close-btn{ margin-top:.4rem; padding:.55rem 1.4rem; border-radius:10px; border:0; background:var(--accent); color:var(--bg); font:inherit; font-weight:700; cursor:pointer; }
+  .sub-title{ margin:0; font-size:1.15rem; font-weight:600; }
+  .order{ margin:0; padding-inline-start:1.6rem; }
+  .order > li{ margin-bottom:.55rem; font-size:.97rem; }
+  .order ul{ margin:.3rem 0 .2rem; padding-inline-start:1.3rem; list-style:disc; }
+  .order ul li{ margin-bottom:.2rem; font-size:.93rem; }
+  .soon{ background:var(--card); border:1px dashed var(--line); border-radius:14px; padding:1.2rem; text-align:center; }
+  .group-title{ margin:1.4rem 0 .6rem; font-size:1rem; color:var(--accent); border-bottom:1px solid var(--line); padding-bottom:.3rem; }
+  .group-title:first-of-type{ margin-top:.4rem; }
+  .free-box{ background:var(--accent-soft); border-radius:10px; padding:.7rem 1rem; margin:.4rem 0 .2rem; font-size:.93rem; }
+  .free-box p{ margin:0 0 .3rem; }
+  .order-free{ margin:0; padding-inline-start:1.3rem; list-style:disc; }
+  .vtitle{ margin:.8rem 0 0; font-weight:600; font-size:.95rem; }
+  .watch{ margin-top:.8rem; font-size:.93rem; }
+  .watch ul{ margin:.3rem 0 0; padding-inline-start:1.3rem; list-style:disc; }
+</style>
+</head>
+<body>
+<header>
+  <h1>קורס עזר בכימיה כללית ופיזיקלית</h1>
+  <p class="sub-title">רפואה, בר אילן</p>
+</header>
+<main>
+
+<div class="copyright-box" role="note">
+  <strong>⚠️ שימו לב:</strong> כל החומר מוגן בחוק זכויות יוצרים וניתן לשימוש עצמי בלבד!
+  כל שליחה, שיתוף והעברה לחבר או כל טריק כזה או אחר – מאותרים באמצעים טכנולוגיים למניעת הפצות.
+  <strong>כל המפר את החוק צפוי לקנס!!!</strong>
+  <br><strong>תכבדו אותי ואת עצמכם ❤️</strong>
+</div>
+
+<nav class="toc">
+  <h2>תוכן עניינים</h2>
+  <ol>
+    <li><a href="#pdf">קובץ PDF כתוב המכיל את תוכן כל השיעורים המוסרטים והמוקלטים</a></li>
+    <li><a href="#order">סדר הצפייה המומלץ בשיעורים</a></li>
+    <li><a href="#lessons">השיעורים המוקלטים והמוסרטים</a></li>
+    <li><a href="#exercises">תרגילי כיתה ובית</a></li>
+  </ol>
+</nav>
+
+<section class="block" id="pdf">
+  <h2>1. קובץ PDF כתוב המכיל את תוכן כל השיעורים המוסרטים והמוקלטים</h2>
+  <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1fgNKiOdanFXDppQ9kMMPHpJ2Yvw4E93P/preview" title="קובץ PDF כתוב של כל השיעורים" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+</section>
+
+<section class="block" id="order">
+  <h2>2. סדר הצפייה המומלץ בשיעורים</h2>
+  <div class="lesson">
+    <h3>סדר הצפייה:</h3>
+    <h4 class="group-title">הנושאים שבאים לידי ביטוי במצגת, תרגיל בית וכיתה 1:</h4>
+    <ol class="order" start="1">
+    <li>יסוד, תרכובת, תערובת</li>
+    <li>המרת יחידות</li>
+    <li>מספר אטומי, מספר מסה, פרוטונים, ניוטרונים, אלקטרונים, יונים, איזוטופים</li>
+    <li>יונים</li>
+    <li>סטויכיומטריה 1
+      <ul><li>סטויכיומטריה 2 - גורם מגביל</li><li>סטוכיומטריה 3</li></ul>
+    </li>
+    <li>הקשר בין אחוז משקלי צפיפות וריכוז מולרי</li>
+    <li>אחוז ניצולת</li>
+    <li>סוגי קרינה רדיואקטיבית</li>
+    <li>קרינה רדיואקטיבית דוגמא</li>
+    <li>חדירות של קרינה רדיואקטיבית</li>
+    </ol>
+    <h4 class="group-title">הנושאים שבאים לידי ביטוי במצגת, תרגיל בית וכיתה 2:</h4>
+    <ol class="order" start="11">
+    <li>אנליזת שריפה מציאת נוסחא אמפירית</li>
+    <li>סריג יוני חלק ראשון
+      <ul><li>סריג יוני חלק שני</li></ul>
+    </li>
+    <li>תגובות שיקוע</li>
+    <li>חימצון חיזור 1
+      <ul><li>חימצון חיזור 2 - כולל איזון משוואות בסביבה שהיא לא חומצית ולא בסיסית</li><li>חימצון חיזור 3 - איזון משוואות חימצון חיזור בסביבה חומצית בסיסית</li></ul>
+    </li>
+    <li>סיכום כתוב בנושא הקדמה לחומצות ובסיסים בתוך קובץ ה-PDF</li>
+    </ol>
+    <h4 class="group-title">הנושאים שבאים לידי ביטוי במצגת, תרגיל בית וכיתה 3:</h4>
+    <ol class="order" start="16">
+    <li>גזים 1
+      <ul><li>גזים שאלה לדוגמא 1</li><li>גזים שאלה לדוגמא 2</li><li>גזים שאלה לדוגמא 3</li><li>שאלות לדוגמא 4</li><li>גזים לא אידיאליים - משוואת ואן דר ואלס</li></ul>
+    </li>
+    <li>אנתלפיית התהוות וחוק הס</li>
+    <li>באמצעות אנתלפיות קשר</li>
+    <li>חום</li>
+    <li>החוק הראשון של התרמודינמיקה</li>
+    </ol>
+    <h4 class="group-title">הנושאים שבאים לידי ביטוי במצגת, תרגיל בית וכיתה 4:</h4>
+    <ol class="order" start="21">
+    <li>מספרים קוונטים וקונפיגורציה אלקטרונית</li>
+    <li>אנרגיה של פוטון, אורך גל, תדירות, מעבר אלקטרונים בין רמות אנרגיה, פונקציית עבודה, אנרגיה קינטית וכו'</li>
+    </ol>
+    <h4 class="group-title">הנושאים שבאים לידי ביטוי במצגת, תרגיל בית וכיתה 5:</h4>
+    <ol class="order" start="23">
+    <li>מבנה לואיס הקדמה - אלקטרוני ערכיות</li>
+    <li>קשירה כימית חלק ראשון</li>
+    <li>קשירה כימית חלק שני</li>
+    <li>קשירה כימית חלק שלישי</li>
+    </ol>
+    <h4 class="group-title">הנושאים שבאים לידי ביטוי במצגת, תרגיל בית וכיתה 6:</h4>
+    <ol class="order" start="27">
+    <li>קשרים בין מולקולריים</li>
+    <li>מולליות, קיפאון, רתיחה, לחץ אוסמוטי, לחץ אדים</li>
+    <li>לחץ אדים תוספת
+      <ul><li>טעות שלהם</li></ul>
+    </li>
+    </ol>
+    <h4 class="group-title">הנושאים שבאים לידי ביטוי במצגת, תרגיל בית וכיתה 7:</h4>
+    <ol class="order" start="30">
+    <li>קינטיקה
+      <ul><li>תוספת לקינטיקה</li></ul>
+    </li>
+    <li>שיווי משקל 1
+      <ul><li>שיווי משקל 2 (בדקה 1:48:05-1:51:34 מדברת על נוסחא שכרגע אתם עוד לא מכירים, תכירו בהמשך הקורס לא לדאוג)</li><li>שיווי משקל 3</li><li>שיווי משקל 4</li></ul>
+    </li>
+    </ol>
+    <h4 class="group-title">הנושאים שבאים לידי ביטוי במצגת, תרגיל בית וכיתה 8:</h4>
+    <ol class="order" start="32">
+    <li>חומצות ובסיסים 1
+      <ul><li>חומצות ובסיסים 2</li><li>חומצות ובסיסים 3</li><li>חומצות ובסיסים 4</li><li>חומצות ובסיסים 5</li></ul>
+    </li>
+    </ol>
+    <div class="free-box">
+      <p><strong>ללא תשלום, על חשבוני</strong> – סרטונים על שאלות של מסתאי ספציפית:</p>
+      <ul class="order-free"><li>מסתאי שאלות חב 1</li><li>מסתאי שאלות חב 2</li><li>מסתאי שאלות חב 3</li><li>מסתאי שאלות חב 4</li></ul>
+    </div>
+    <h4 class="group-title">הנושאים שבאים לידי ביטוי במצגת, תרגיל בית וכיתה 9:</h4>
+    <ol class="order" start="33">
+    <li>אנטרופיה התחלה
+      <ul><li>אנטרופיה המשך, האנרגיה החופשית של גיבס</li><li>אנרגיה חופשית של גיבס המשך והאנטרופיה של היקום</li><li>משוואת וואןט הוף + המשך קצת על שיווי משקל</li></ul>
+    </li>
+    <li>אנרגיית יינון</li>
+    </ol>
+    <h4 class="group-title">הנושאים שבאים לידי ביטוי במצגת, תרגיל בית וכיתה 10:</h4>
+    <ol class="order" start="35">
+    <li>אלקטרוכימיה 1
+      <ul><li>אלקטרוכימיה 2</li><li>אלקטרוכימיה 3</li><li>אלקטרוכימיה 4</li></ul>
+    </li>
+    </ol>
+  </div>
+</section>
+
+<section class="block" id="lessons">
+  <h2>3. השיעורים המוקלטים והמוסרטים</h2>
+  <div class="intro-box">
+    <p>ממליצה <em>להדפיס את קובץ ה-PDF שמכיל את התוכן הכתוב של כל השיעורים, ולצפות בקורס העזר כשהקובץ מולכם</em> — וככה תוכלו לכתוב לעצמכם הערות, להדגיש דברים חשובים וכו'.</p>
+    <p><em>שימו לב להתייחס לכל מה שכתוב בקובץ ה-PDF</em> (יש דברים שלא אמרתי בסרטונים והוספתי לכם בכתב אז לשים לב!!!).</p>
+    <p><em>תתמסרו לשיעורים המוקלטים והמוסרטים</em>, בטוחה שיש דברים שיעלו לכם ותרצו לשאול — תמשיכו לצפות עוד 5 דק', 10 דק'... וככל הנראה תקבלו מענה. אם זה בוער בכם, תכתבו לעצמכם בצד.</p>
+    <p>היה וסיימתם לצפות בכל השיעור ולקרוא את קובץ ה-PDF ועדיין לא קיבלתם מענה למה שרציתם — <em>אני פה!!!</em></p>
+  </div>
+
+  <h4 class="group-title">הנושאים שבאים לידי ביטוי במצגת, תרגיל בית וכיתה 1:</h4>
+  <div class="lesson">
+    <h3><span class="num">1</span>יסוד, תרכובת, תערובת</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1q-H22ZeJFlaBxOyog_K38zbRHfFLpTVs/preview" title="יסוד, תרכובת, תערובת" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">2</span>המרת יחידות</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1SokMch1QDv4darevMzE1ckRbLNfb-GUc/preview" title="המרת יחידות" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">3</span>מספר אטומי, מספר מסה, פרוטונים, ניוטרונים, אלקטרונים, יונים, איזוטופים</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/19B52Ygi-jrX8QsfRXoJIupJeO1TkE4Ge/preview" title="מספר אטומי, מספר מסה, פרוטונים, ניוטרונים, אלקטרונים, יונים, איזוטופים" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">4</span>יונים</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1-iI-dw3DVs894FeDh96ktSmOOintA8Zm/preview" title="יונים" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">5</span>סטויכיומטריה</h3>
+    <p class="vtitle">סטויכיומטריה 1</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1ek78fq0WOol51GgfjDdqaKOG6TXHi-zN/preview" title="סטויכיומטריה 1" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+    <p class="vtitle">סטויכיומטריה 2 - גורם מגביל</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1xDq6nrY2FGVvMenQwxTB3nLxXpZ73FWc/preview" title="סטויכיומטריה 2 - גורם מגביל" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+    <p class="vtitle">סטוכיומטריה 3</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1c6sTDtKZ0_wvfC9LijZKaO0S42fN8j71/preview" title="סטוכיומטריה 3" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">6</span>הקשר בין אחוז משקלי צפיפות וריכוז מולרי</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1jH-nGbm2yZX01UFk5Un4gcNZZSbu3N-a/preview" title="הקשר בין אחוז משקלי צפיפות וריכוז מולרי" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">7</span>אחוז ניצולת</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1O2F562vMWjbhnRvLqCWNj7OsQ80DMe89/preview" title="אחוז ניצולת" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">8</span>סוגי קרינה רדיואקטיבית</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1MwGyJzYrm9vM6E1yNUVTabfeWV-p4NMu/preview" title="סוגי קרינה רדיואקטיבית" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">9</span>קרינה רדיואקטיבית דוגמא</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/16_6jPi0so2NFLV5JWxFU6bwpUIWdVbRd/preview" title="קרינה רדיואקטיבית דוגמא" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">10</span>חדירות של קרינה רדיואקטיבית</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1M2g4GgGAnGuuFItMVjMJlG_jOZp-DFqU/preview" title="חדירות של קרינה רדיואקטיבית" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <h4 class="group-title">הנושאים שבאים לידי ביטוי במצגת, תרגיל בית וכיתה 2:</h4>
+  <div class="lesson">
+    <h3><span class="num">11</span>אנליזת שריפה מציאת נוסחא אמפירית</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1QOghxFl4gLvO6p0xqnnHTt8yCqe29KC2/preview" title="אנליזת שריפה מציאת נוסחא אמפירית" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">12</span>סריג יוני</h3>
+    <p class="vtitle">חלק ראשון</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1FqRQX_KOyERRT72crl5mWzzAsz7MsyYD/preview" title="חלק ראשון" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+    <p class="vtitle">חלק שני</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1fdS_1ndjlnel49jLzhu6PrRgqgCSJY6_/preview" title="חלק שני" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">13</span>תגובות שיקוע</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1ZHWKT247FSJpPSF2qmt5nVvnYXsiFlaL/preview" title="תגובות שיקוע" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">14</span>חימצון חיזור</h3>
+    <p class="vtitle">חימצון חיזור 1</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1xE439rIUTRFsNMSV_t2CxmNE1kzkBFRa/preview" title="חימצון חיזור 1" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+    <p class="vtitle">חימצון חיזור 2 - כולל איזון משוואות בסביבה שהיא לא חומצית ולא בסיסית</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1zexz_OVHiztcMsoz9FvWLfJF5GMhIsN1/preview" title="חימצון חיזור 2 - כולל איזון משוואות בסביבה שהיא לא חומצית ולא בסיסית" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+    <p class="vtitle">חימצון חיזור 3 - איזון משוואות חימצון חיזור בסביבה חומצית בסיסית</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/177d6Up--6ovv9hmbGG0MSa_kAKeH4gPu/preview" title="חימצון חיזור 3 - איזון משוואות חימצון חיזור בסביבה חומצית בסיסית" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">15</span>סיכום כתוב בנושא הקדמה לחומצות ובסיסים</h3>
+    <div class="pdf-note">📄 הסיכום הכתוב נמצא בתוך קובץ ה-PDF (סעיף 1 בראש הדף).</div>
+  </div>
+
+  <h4 class="group-title">הנושאים שבאים לידי ביטוי במצגת, תרגיל בית וכיתה 3:</h4>
+  <div class="lesson">
+    <h3><span class="num">16</span>גזים</h3>
+    <p class="vtitle">גזים 1</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/10fy4-L-lx6f3diMmJfGafI4UK2FlePtN/preview" title="גזים 1" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+    <p class="vtitle">גזים שאלה לדוגמא 1</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1G99loX6WSyIpKwvvzpofwIvRJ_rGWLNm/preview" title="גזים שאלה לדוגמא 1" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+    <p class="vtitle">גזים שאלה לדוגמא 2</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1WTG6P2zmKmJeXfuvdMAnorBUxVdKhf5Q/preview" title="גזים שאלה לדוגמא 2" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+    <p class="vtitle">גזים שאלה לדוגמא 3</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1WLkt5ZdEt6fI6EAifS7wC4gHf5Mn5gFv/preview" title="גזים שאלה לדוגמא 3" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+    <p class="vtitle">שאלות לדוגמא 4</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1kvgW7WsMoGzj2Lekm6b6EVZaxNDGvI1A/preview" title="שאלות לדוגמא 4" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+    <p class="vtitle">גזים לא אידיאליים - משוואת ואן דר ואלס</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1DnZxKPy-xVIbtwngKcLSknYwxroHXIgq/preview" title="גזים לא אידיאליים - משוואת ואן דר ואלס" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">17</span>אנתלפיית התהוות וחוק הס</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1N52DuEO1u89dvaPVwc4V2-sQ46MT68fS/preview" title="אנתלפיית התהוות וחוק הס" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">18</span>באמצעות אנתלפיות קשר</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1-H6ruq9xKAlda-9qzsJEWuXN5-KNRK9B/preview" title="באמצעות אנתלפיות קשר" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">19</span>חום</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1cEJmDU2ysAxy02HH5eht58C23b2Fzdf_/preview" title="חום" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">20</span>החוק הראשון של התרמודינמיקה</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1HUzl9NoLatHfvJqnfYkst6NePrHyHc50/preview" title="החוק הראשון של התרמודינמיקה" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <h4 class="group-title">הנושאים שבאים לידי ביטוי במצגת, תרגיל בית וכיתה 4:</h4>
+  <div class="lesson">
+    <h3><span class="num">21</span>מספרים קוונטים וקונפיגורציה אלקטרונית</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/15ltyXeJjNQ3XbJvrmE2_lEgQKahLOw9h/preview" title="מספרים קוונטים וקונפיגורציה אלקטרונית" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">22</span>אנרגיה של פוטון, אורך גל, תדירות, מעבר אלקטרונים בין רמות אנרגיה, פונקציית עבודה, אנרגיה קינטית וכו'</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/19rz7BC04TpjG3I7uAaWHY0AifsUaIMLR/preview" title="אנרגיה של פוטון, אורך גל, תדירות, מעבר אלקטרונים בין רמות אנרגיה, פונקציית עבודה, אנרגיה קינטית וכו'" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <h4 class="group-title">הנושאים שבאים לידי ביטוי במצגת, תרגיל בית וכיתה 5:</h4>
+  <div class="lesson">
+    <h3><span class="num">23</span>מבנה לואיס הקדמה - אלקטרוני ערכיות</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1oi1fvvUvEHfFpU_3y7t75kDPBTYdfFQu/preview" title="מבנה לואיס הקדמה - אלקטרוני ערכיות" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">24</span>קשירה כימית חלק ראשון</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1VPC2r2FGr50yiijyjlhxm3dSP9tDuWFP/preview" title="קשירה כימית חלק ראשון" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">25</span>קשירה כימית חלק שני</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1XnZjESuztCbKnAA6rFioWD4eVDb-P5Pq/preview" title="קשירה כימית חלק שני" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">26</span>קשירה כימית חלק שלישי</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1T01Cxt_Ts5JIQYpU9O4SD2fKhgZPdF_U/preview" title="קשירה כימית חלק שלישי" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <h4 class="group-title">הנושאים שבאים לידי ביטוי במצגת, תרגיל בית וכיתה 6:</h4>
+  <div class="lesson">
+    <h3><span class="num">27</span>קשרים בין מולקולריים</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1fKBHRUoeL-1aI_Itj2kv_OrAEvKjjsc9/preview" title="קשרים בין מולקולריים" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">28</span>מולליות, קיפאון, רתיחה, לחץ אוסמוטי, לחץ אדים</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1Bb1bs-79TJhupG8NJtNL8Mj4Yvi3Z4EX/preview" title="מולליות, קיפאון, רתיחה, לחץ אוסמוטי, לחץ אדים" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">29</span>לחץ אדים</h3>
+    <p class="vtitle">לחץ אדים תוספת</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1XZJYhnNdq9z0Ee2Rt0kkSU6rc8F4u364/preview" title="לחץ אדים תוספת" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+    <p class="vtitle">טעות שלהם</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1XsAS6Cn6gwpQN0hLCNijvpl3oXxmz_xn/preview" title="טעות שלהם" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <h4 class="group-title">הנושאים שבאים לידי ביטוי במצגת, תרגיל בית וכיתה 7:</h4>
+  <div class="lesson">
+    <h3><span class="num">30</span>קינטיקה</h3>
+    <p class="vtitle">קינטיקה</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1kMaWOKwMLFLWe4_7zdxpAUD_YZhXzNGD/preview" title="קינטיקה" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+    <p class="vtitle">תוספת לקינטיקה</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1B0KaWGb8ZutWqJnQz2uG9RiqUplUTBxK/preview" title="תוספת לקינטיקה" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">31</span>שיווי משקל</h3>
+    <p class="vtitle">שיווי משקל 1</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1afAOoNHEWB3bhdlKhrojcNYx-j5e8GIJ/preview" title="שיווי משקל 1" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+    <p class="vtitle">שיווי משקל 2 (בדקה 1:48:05-1:51:34 מדברת על נוסחא שכרגע אתם עוד לא מכירים, תכירו בהמשך הקורס לא לדאוג)</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/16huOTw2NoIy_-YT1bsZRMeBFxdlm1e68/preview" title="שיווי משקל 2 (בדקה 1:48:05-1:51:34 מדברת על נוסחא שכרגע אתם עוד לא מכירים, תכירו בהמשך הקורס לא לדאוג)" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+    <p class="vtitle">שיווי משקל 3</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/19dLASj9Q0nm8IPZc4lm4OdNeNugbKVG4/preview" title="שיווי משקל 3" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+    <p class="vtitle">שיווי משקל 4</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1aYr8spWcvDgBM6Jm9GyTfVK6bybfJyXR/preview" title="שיווי משקל 4" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <h4 class="group-title">הנושאים שבאים לידי ביטוי במצגת, תרגיל בית וכיתה 8:</h4>
+  <div class="lesson">
+    <h3><span class="num">32</span>חומצות ובסיסים</h3>
+    <p class="vtitle">חומצות ובסיסים 1</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1l1z8adVw25S6SGuDzvf3WrY09wMMu7q2/preview" title="חומצות ובסיסים 1" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+    <p class="vtitle">חומצות ובסיסים 2</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1tloFDSIFDzJF5GuJBACDuW-UfKWp7aci/preview" title="חומצות ובסיסים 2" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+    <p class="vtitle">חומצות ובסיסים 3</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1iWNT4dXxgcFnuM9sL17420mZakw2Vt1x/preview" title="חומצות ובסיסים 3" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+    <p class="vtitle">חומצות ובסיסים 4</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1vM8kPhutuNAzL9M12lch_D5JFrlOwRx1/preview" title="חומצות ובסיסים 4" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+    <p class="vtitle">חומצות ובסיסים 5</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1hPGLz8OckEkYH__jhSkPYTm4CCrm1EaN/preview" title="חומצות ובסיסים 5" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3>ללא תשלום, על חשבוני – סרטונים על שאלות של מסתאי ספציפית</h3>
+    <p class="vtitle">מסתאי שאלות חב 1</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1Fl5JT7_ALsfTd-mdJogDSz3Kr5b6TL6D/preview" title="מסתאי שאלות חב 1" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+    <p class="vtitle">מסתאי שאלות חב 2</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1FN0w1g0rHqSRyohSbSlvBa508rN0PaCq/preview" title="מסתאי שאלות חב 2" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+    <p class="vtitle">מסתאי שאלות חב 3</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1H_k6ObuI1aIlaoG_pztTViXx4GQ-4a_p/preview" title="מסתאי שאלות חב 3" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+    <p class="vtitle">מסתאי שאלות חב 4</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1JAjOrZ-zcEWy9PV3di4HPDgG_X5sQ3g9/preview" title="מסתאי שאלות חב 4" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <h4 class="group-title">הנושאים שבאים לידי ביטוי במצגת, תרגיל בית וכיתה 9:</h4>
+  <div class="lesson">
+    <h3><span class="num">33</span>אנטרופיה</h3>
+    <p class="vtitle">אנטרופיה התחלה</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1iGWylAFEDVrdcPx65YZ1nKM2buC7MpPL/preview" title="אנטרופיה התחלה" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+    <p class="vtitle">אנטרופיה המשך, האנרגיה החופשית של גיבס</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1tDZy2TpqZLDB9rjbNpBcCwIkP2_eMN_p/preview" title="אנטרופיה המשך, האנרגיה החופשית של גיבס" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+    <p class="vtitle">אנרגיה חופשית של גיבס המשך והאנטרופיה של היקום</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1CY1WGNUlFieSzg9ysFhw71CXrEIp4z0E/preview" title="אנרגיה חופשית של גיבס המשך והאנטרופיה של היקום" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+    <p class="vtitle">משוואת וואןט הוף + המשך קצת על שיווי משקל</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1wVWrfsAVH-1wMbG4yov3FX_9WLCpxbea/preview" title="משוואת וואןט הוף + המשך קצת על שיווי משקל" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">34</span>אנרגיית יינון</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1DGEQRHIN5Yb-lVX7zGGSGtenxLk301LM/preview" title="אנרגיית יינון" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+  <h4 class="group-title">הנושאים שבאים לידי ביטוי במצגת, תרגיל בית וכיתה 10:</h4>
+  <div class="lesson">
+    <h3><span class="num">35</span>אלקטרוכימיה</h3>
+    <p class="vtitle">אלקטרוכימיה 1</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1zDFbfs83h-8Ygv03e8qV1OXm3pYOar3L/preview" title="אלקטרוכימיה 1" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+    <p class="vtitle">אלקטרוכימיה 2</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/10AWZj1kqGH91ROEAuqqamg9Jvdo2ViMN/preview" title="אלקטרוכימיה 2" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+    <p class="vtitle">אלקטרוכימיה 3</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1Yni7m1Ta5vn6I2jOpaf8GnKsmquj6hek/preview" title="אלקטרוכימיה 3" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+    <p class="vtitle">אלקטרוכימיה 4</p>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1VkoYxD926-VmQoFvrbdR5zRuZyV5rRqq/preview" title="אלקטרוכימיה 4" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+
+</section>
+
+<section class="block" id="exercises">
+  <h2>4. תרגילי כיתה ובית</h2>
+  <div class="intro-box">
+    <p>מצורף פתרון כתוב ומפורט שהכנתי לכם לכל אחד מתרגילי הכיתה והבית, למעט:</p>
+    <ul>
+      <li><em>תרגיל בית 7</em> – יש פתרון שהמרצה פרסם אז צירפתי לכם, ואת רובו פתרנו יחד בקורס העזר.</li>
+      <li><em>תרגיל כיתה 9</em> – יש פתרון שהמרצה פרסם אז צירפתי לכם.</li>
+      <li><em>תרגיל בית 9</em> – לא קיים כזה.</li>
+    </ul>
+  </div>
+
+  <h4 class="group-title">תרגילי כיתה</h4>
+  <div class="lesson">
+    <h3><span class="num">1</span>תרגיל כיתה 1</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1JJOnIM_anKksGQmuHfZdPXbZ2KbLndHI/preview" title="תרגיל כיתה 1" loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">2</span>תרגיל כיתה 2</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1Ux-SQssGQVQ7Xy0toyQqp8MuZu562dFY/preview" title="תרגיל כיתה 2" loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">3</span>תרגיל כיתה 3</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/11DGMGq3_VyKPkX-HWfyATKNMab9t6oDo/preview" title="תרגיל כיתה 3" loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">4</span>תרגיל כיתה 4</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1oJYpSnM8DLgPF6CYqM8AFUtuJ9sCTSTG/preview" title="תרגיל כיתה 4" loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">5</span>תרגיל כיתה 5</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/19BhfxLGCbeZ6ZyFImfeHfZKiaHoVZtAW/preview" title="תרגיל כיתה 5" loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">6</span>תרגיל כיתה 6</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1gnxxXC95yoE1eQteHW3-OdJR72D4ohWC/preview" title="תרגיל כיתה 6" loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">7</span>תרגיל כיתה 7</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1Vsvef1-97ZZUGb4pg7ADYkWGmYVt90eB/preview" title="תרגיל כיתה 7" loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">8</span>תרגיל כיתה 8</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/16lY4tAxELOIidFP8WfY6FsMVXNGcKqsX/preview" title="תרגיל כיתה 8" loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">9</span>תרגיל כיתה 9</h3>
+    <div class="pdf-note">הפתרון המצורף הוא הפתרון שהמרצה פרסם.</div>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1y-tj7mesf7-peujXIdTdbalSLx10e296/preview" title="תרגיל כיתה 9" loading="lazy"></iframe></div>
+  </div>
+
+  <h4 class="group-title">תרגילי בית</h4>
+  <div class="lesson">
+    <h3><span class="num">1</span>תרגיל בית 1</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/18rmmwkU_TIlG0vgy5ciDKIUHONCiIpYr/preview" title="תרגיל בית 1" loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">2</span>תרגיל בית 2</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1tLHezgxxmmN9I1JESETZnFXZ-C-hVdyK/preview" title="תרגיל בית 2" loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">3</span>תרגיל בית 3</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1IvTihdqOooXDY-1jtKghLQbk1wmFkEBv/preview" title="תרגיל בית 3" loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">4</span>תרגיל בית 4</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1vbEX1rOeeLSVYZcBI2MaFLAhoZzK6ao2/preview" title="תרגיל בית 4" loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">5</span>תרגיל בית 5</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/16A3viH51nnLBGbCiGEwuHSk2I3sPTmo8/preview" title="תרגיל בית 5" loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">6</span>תרגיל בית 6</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1gYGH48SGsfAOBySgkHtDXMNsSwJu6JXr/preview" title="תרגיל בית 6" loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">7</span>תרגיל בית 7</h3>
+    <div class="pdf-note">הפתרון המצורף הוא הפתרון שהמרצה פרסם (רובו נפתר יחד בקורס העזר).</div>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/1_V9iVMeuFw7BdZ8oPzEFrIG52N9Rk6LW/preview" title="תרגיל בית 7" loading="lazy"></iframe></div>
+  </div>
+
+  <div class="lesson">
+    <h3><span class="num">8</span>תרגיל בית 8</h3>
+    <div class="drive-frame"><iframe src="https://drive.google.com/file/d/181QMCND_JndT9sLALszS5VkIvBgbjHHq/preview" title="תרגיל בית 8" loading="lazy"></iframe></div>
+  </div>
+
+</section>
+
+<footer style="text-align:center; padding:1.5rem 0 .5rem; border-top:2px solid var(--line);">
+  <p style="font-size:1.1rem; font-weight:700; color:var(--accent); margin:0 0 .3rem;">בהצלחה ענקית!</p>
+  <p style="margin:0; opacity:.85;">תמיד פה בשבילכם</p>
+  <p style="margin:0; opacity:.85;">מיטל בנדרסקי</p>
+  <p style="margin:.6rem 0 0; font-size:.85rem; opacity:.8;">כל הזכויות שמורות · החומר לשימוש עצמי בלבד, אין להעביר או להפיץ</p>
+  <p style="margin:.8rem 0 0;"><button type="button" class="a11y-link" data-open-statement>הצהרת נגישות</button></p>
+</footer>
+
+</main>
+
+<button type="button" id="toTop" class="fab" aria-label="חזרה לראש העמוד" title="חזרה לראש העמוד" hidden>
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<button type="button" id="a11yBtn" class="fab" aria-label="תפריט נגישות" aria-expanded="false" aria-controls="a11yPanel" title="תפריט נגישות">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="4.5" r="2.2"/><path d="M5 8.2c0-.6.5-1 1-1h12c.6 0 1 .4 1 1s-.4 1-1 1h-4.3v3.3l2 6.7c.2.6-.1 1.2-.7 1.4-.6.2-1.2-.1-1.4-.7L12 14.3l-1.6 5.6c-.2.6-.8.9-1.4.7-.6-.2-.9-.8-.7-1.4l2-6.7V9.2H6c-.5 0-1-.4-1-1z"/></svg>
+</button>
+
+<div id="a11yPanel" class="a11y-panel" role="region" aria-label="תפריט נגישות" hidden>
+  <h2>תפריט נגישות</h2>
+  <button type="button" class="opt" id="a11yInc">הגדלת טקסט</button>
+  <button type="button" class="opt" id="a11yDec">הקטנת טקסט</button>
+  <button type="button" class="opt" id="a11yHc" aria-pressed="false">ניגודיות גבוהה</button>
+  <button type="button" class="opt" id="a11yHl" aria-pressed="false">הדגשת קישורים</button>
+  <button type="button" class="opt" id="a11yReset">איפוס</button>
+  <button type="button" class="a11y-link" data-open-statement>הצהרת נגישות</button>
+</div>
+
+<dialog id="a11yStatement" aria-labelledby="a11yStTitle">
+  <h2 id="a11yStTitle">הצהרת נגישות</h2>
+  <p>אתר זה רואה חשיבות רבה במתן שירות שוויוני לכלל האוכלוסייה, לרבות אנשים עם מוגבלות. אנו פועלים להנגיש את האתר בהתאם לתקן הישראלי (ת"י 5568) לנגישות תכנים באינטרנט ברמת AA, ובהתאם לחוק שוויון זכויות לאנשים עם מוגבלות, התשנ"ח-1998 ותקנותיו.</p>
+  <p>האתר כולל תפריט נגישות המאפשר, בין היתר: הגדלה והקטנה של גודל הטקסט, הפעלת ניגודיות גבוהה, והדגשת קישורים. ניתן להפעיל את התפריט באמצעות הכפתור הצף בפינת המסך.</p>
+  <p>חרף מאמצינו להנגיש את כלל דפי האתר, ייתכן שיימצאו חלקים שטרם הונגשו במלואם. אנו ממשיכים לפעול לשיפור נגישות האתר באופן שוטף.</p>
+  <p>אם נתקלתם בבעיית נגישות באתר, או שיש לכם הצעות לשיפור, נשמח שתיצרו קשר:<br><a href="mailto:meitalchemistry100@gmail.com">meitalchemistry100@gmail.com</a></p>
+  <button type="button" class="close-btn" id="a11yStClose">סגירה</button>
+</dialog>
+
+<script>
+(function(){
+  var root=document.documentElement, KEY='a11y-prefs-v1';
+  var st={size:100,hc:false,hl:false};
+  try{ var saved=JSON.parse(localStorage.getItem(KEY)||'null'); if(saved){ st.size=+saved.size||100; st.hc=!!saved.hc; st.hl=!!saved.hl; } }catch(e){}
+  var $=function(id){return document.getElementById(id);};
+  var btn=$('a11yBtn'), panel=$('a11yPanel'), hc=$('a11yHc'), hl=$('a11yHl'), dlg=$('a11yStatement'), top=$('toTop');
+
+  function apply(){
+    root.style.fontSize=st.size+'%';
+    root.classList.toggle('a11y-hc',st.hc);
+    root.classList.toggle('a11y-hl',st.hl);
+    hc.setAttribute('aria-pressed',String(st.hc));
+    hl.setAttribute('aria-pressed',String(st.hl));
+    try{ localStorage.setItem(KEY,JSON.stringify(st)); }catch(e){}
+  }
+  function setPanel(open){
+    panel.hidden=!open; btn.setAttribute('aria-expanded',String(open));
+  }
+  btn.addEventListener('click',function(){ setPanel(panel.hidden); });
+  $('a11yInc').addEventListener('click',function(){ st.size=Math.min(150,st.size+10); apply(); });
+  $('a11yDec').addEventListener('click',function(){ st.size=Math.max(80,st.size-10); apply(); });
+  hc.addEventListener('click',function(){ st.hc=!st.hc; apply(); });
+  hl.addEventListener('click',function(){ st.hl=!st.hl; apply(); });
+  $('a11yReset').addEventListener('click',function(){ st={size:100,hc:false,hl:false}; apply(); });
+
+  document.querySelectorAll('[data-open-statement]').forEach(function(b){
+    b.addEventListener('click',function(){ setPanel(false); if(dlg.showModal){dlg.showModal();}else{dlg.setAttribute('open','');} });
+  });
+  $('a11yStClose').addEventListener('click',function(){ dlg.close(); });
+  dlg.addEventListener('click',function(e){ if(e.target===dlg){ dlg.close(); } });
+
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape' && !panel.hidden){ setPanel(false); btn.focus(); } });
+  document.addEventListener('click',function(e){ if(!panel.hidden && !panel.contains(e.target) && !btn.contains(e.target)){ setPanel(false); } });
+
+  function onScroll(){ top.hidden = (window.pageYOffset||root.scrollTop) < 300; }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  top.addEventListener('click',function(){
+    var reduce=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({top:0,behavior:reduce?'auto':'smooth'});
+  });
+  apply(); onScroll();
+})();
+</script>
+</body>
+</html>
